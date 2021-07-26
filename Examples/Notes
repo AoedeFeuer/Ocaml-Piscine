@@ -1,5 +1,132 @@
 1 day
 
+ocaml - интерпретатор;
+ocamlc - компилятор в байт-код;
+ocamlopt - компилятор в машинный (native) код.
+
 ocamlopt --> compile
 ocaml --> ;; at the end
 print_endline
+
+Types:
+1. Целые числа в Objective Caml объявляются с помощью ключевого слова int.
+
+
+2. Числа с плавающей точкой в Objective Caml объявляются с помощью ключевого слова float.
+
+
+3. Символы в Objective Caml тип char, соответствуют целым числам в интервале от 0 до 255, первые 128 значений соответствуют ASCII,
+
+4. Строки в Objective Caml — тип string — последовательность символов определенной длины.
+
+5. Булевый тип в Objective Caml представлен множеством, состоящем из 2 элементов: true и false.
+
+6. Тип Unit определяет множество всего из одного элемента, значение которого (). Данный тип является аналогом тип void в языке С++.
+
+7 <fun>.
+
+Операторы:
+Операции над целочисленным типом:
++ — сложение
+— — вычитание и унарный минус
+* — умножение
+/ — деление
+mod — остаток целочисленного деления
+
+Операции над числами с плавающей точкой:
++. - сложение
+—. — вычитание и унарный минус
+*. — умножение
+/. — деление
+** — возведение в степень
+
+Для сравнения значений между собой используют такие операции:
+
+Структурное равенство   =
+Физическое равенство    ==
+Отрицание =             <>
+Отрицание ==            !=
+
+Структурное равенство позволяет сравнить значение полей структуры (при множественных типах), в то время как физическое сравнивает адреса в памяти. 
+Следует помнить, что вещественные числа и строки относятся к структурным типам.
+
+# ( + );;
+- : int -> int -> int = <fun>
+
+# ( +. );;
+- : float -> float -> float = <fun>
+
+# ( < );;
+- : 'a -> 'a -> bool = <fun>
+
+# (lsr);; (сдвиг)
+- : int -> int -> int = <fun>
+
+# ( ^ );;
+- : string -> string -> string = <fun>
+
+# ( <> );; (!=)
+- : 'a -> 'a -> bool = <fun>
+
+# print_string "value: " ; print_int 42 ; print_char '\n' ;;
+value: 42
+- : unit = ()
+
+Возврат 42
+# print_string "value: " ; print_int 42 ; print_char '\n' ; 42 ;;
+value: 42
+- : int = 42
+
+# begin print_string "value: " ; print_int 42 ; print_char '\n' ; 42 end ; "cou" ;;
+Warning 10 [non-unit-statement]: this expression should have type unit.
+value: 42
+- : string = "cou"
+
+# begin
+   print_string "value: ";
+   print_int 42
+  end;;
+value: 42- : unit = ()
+
+Ввод:
+# read_line ();;
+www
+- : string = "www"
+
+binding != variable
+# let a = 42;;
+val a : int = 42
+# let a = 42 in a + 42;;
+- : int = 84
+
+# let a = 20 in
+  let b = 22 in
+  a + b ;;
+- : int = 42
+
+# let res = 20 + 21 in res + 1;;
+- : int = 42
+
+# let a = 20 
+  and b = 22 in
+  a + b;;
+- : int = 42
+
+Conditions
+# if 42 = 42
+  then print_endline "yes"
+  else print_endline "no"
+  ;;
+yes
+- : unit = ()
+
+!!!
+# if 42 = 42
+  then 42
+  else 42.42
+  ;;
+Error: This expression has type float but an expression was expected of type
+         int
+
+
+https://ocaml.org/releases/4.02/htmlman/libref/Pervasives.html
