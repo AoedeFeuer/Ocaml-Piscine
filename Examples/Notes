@@ -1,0 +1,5 @@
+1 day
+
+ocamlopt --> compile
+ocaml --> ;; at the end
+print_endline
