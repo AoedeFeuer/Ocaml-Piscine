@@ -13,8 +13,13 @@ let rec ft_countdown x =
         end
 
 let main () =
+    print_endline "Test with [3]:";
     ft_countdown 3;
+    print_endline "Test with [0]:";
     ft_countdown 0;
-    ft_countdown (-3)
+    print_endline "Test with [-3]:";
+    ft_countdown (-3);
+    print_endline "Test with [-1]:";
+    ft_countdown (-1)
 
 let () = main ()
