@@ -106,9 +106,9 @@ struct
     | As -> King
 end
 
-type t = ( string * string )
+type t = { value: Value.t ; color: Color.t }
 
-let newCard value color = ( value, color )
+let newCard value color = { value = value ; color = color }
 
 let allSpades =
   List.map (fun card -> (newCard card Color.Spade)) Value.all
@@ -122,17 +122,17 @@ let allDiamonds =
 let allClubs =
   List.map (fun card -> (newCard card Color.Club)) Value.all
   
-let all t =
+let all =
   allSpades @ allHearts @ allDiamonds @ allClubs
 
-let getValue ( value, _ ) = value
-let getColor ( _, color ) = color
+let getValue t = t.value
+let getColor t = t.color
 
 let toString t =
-  Printf.sprintf ("%s%s") (Value.toString (getValue t)) (Color.toString (getColor t))
+  Printf.sprintf ("%s%s") (Value.toString t.value) (Color.toString t.color)
 
 let toStringVerbose t =
-  Printf.sprintf ("Card(%s, %s)") (Value.toStringVerbose (getValue t)) (Color.toStringVerbose (getColor t))
+  Printf.sprintf ("Card(%s, %s)") (Value.toStringVerbose t.value) (Color.toStringVerbose t.color)
 
 let compare (v1, _) (v2, _) =
   if v1 = v2 then 0 else
@@ -147,17 +147,13 @@ let min card1 card2 =
   if card1 > card2 then card2
   else card1
 
-(*val best t = 
-  let cur = ("0", "0") in 
-  let rec big value cur = 
-    match cur with
-    | [] -> cur
-    | hd :: tl -> if cur.getValue >= hd.getValue then big tl cur else
-    |           if cur.getValue < hd.getValue then cur := hd; big tl cur else ()
-  in big t cur*)
+let best card =
+    match card with
+    [] -> invalid_arg "No content cards"
+    | hd :: tl -> List.fold_left max hd tl
 
-let isOf (_, c) color =
-  color = c
+let isOf t color =
+  color = t.color
 
 let isSpade t =
   isOf t Color.Spade
