@@ -1,8 +1,5 @@
-module type ft_ref = 
-sig
-  type 'a ft_ref
-  val return : 'a -> 'a ft_ref
-  val get : 'a ft_ref -> 'a
-  val set : 'a ft_ref -> 'a -> unit
-  val bind : 'a ft_ref -> ('a -> 'b ft_ref) -> 'b ft_ref
-end
+type 'a ft_ref = { contents : 'a }
+let get x = x.contents
+let return x = { contents = x}
+let set x y = x.contents <- y
+let bind x f:'b ft_ref = f (get x)
