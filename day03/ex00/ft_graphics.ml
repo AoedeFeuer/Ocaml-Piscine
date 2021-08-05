@@ -12,27 +12,23 @@ let draw_square x y z =
   Graphics.moveto (x + z / 2) (y - z / 2);
   Graphics.lineto (x + z / 2) ((y - z / 2) + z)
 
-let draw_tree_node Node  = 
-(**  | [] -> []
-  | h :: t -> *)
-  draw_square 300 300 100;
-  draw_square 600 400 100;
-  draw_square 600 500 100;
-  Graphics.moveto (300 + 100 / 2) (300 + 100 / 2);
-  Graphics.lineto (600 - 100 / 2) (400 - 100 / 2);
-  Graphics.moveto (300 + 100 / 2) (300 + 100 / 2);
-  Graphics.lineto (500 - 100 / 2) (500 - 100 / 2);
-  Graphics.moveto 300 300;
-  Graphics.draw_string p;
-  Graphics.moveto 600 400;
-  Graphics.draw_string c1;
-  Graphics.moveto 600 500;
-  Graphics.draw_string c2
-
+let draw_tree_node tree  = 
+  let rec drawning_node node x y z =
+    match node with
+    | Nil -> Graphics.moveto x y; Graphics.draw_string "Nil"; draw_square x y z
+    | Node (par, ch1, ch2) ->
+      begin
+        Graphics.moveto x y; Graphics.draw_string par; draw_square x y z;
+        drawning_node ch1 (x + z * 2) (y + z) z;
+        Graphics.moveto (x + z) (y - z / 2); Graphics.lineto (x + z) (y + z);
+        drawning_node ch2 (x + z * 2) (y - z) z;
+        Graphics.moveto (x + z) (y - z / 2)); Graphics.lineto (x + z) (y - z)
+      end
+    in drawning_node tree 300 400 100
 
 let main () =
   Graphics.open_graph " 800x600";
-  draw_tree_node Node ("42", Nil, Nil);
+  draw_tree_node (Node ("42", Nil, Nil));
 (*  draw_square 300 400 100;
   Graphics.moveto 400 300;
   Graphics.draw_string "42";*)
