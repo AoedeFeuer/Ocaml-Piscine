@@ -134,9 +134,9 @@ let toString t =
 let toStringVerbose t =
   Printf.sprintf ("Card(%s, %s)") (Value.toStringVerbose t.value) (Color.toStringVerbose t.color)
 
-let compare (v1, _) (v2, _) =
-  if v1 = v2 then 0 else
-  if v1 > v2 then 1 else
+let compare v1 v2 =
+  if v1.value = v2.value then 0 else
+  if v1.value > v2.value then 1 else
   (-1)
 
 let max card1 card2 =

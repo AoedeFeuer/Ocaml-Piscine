@@ -18,7 +18,7 @@ let main () =
   Printf.printf ("%s %s\n") (Card.toString card2) (Card.toStringVerbose card2);
   Printf.printf ("%s %s\n") (Card.toString card3) (Card.toStringVerbose card3);
   Printf.printf ("%s %s\n") (Card.toString card4) (Card.toStringVerbose card4);
-  Printf.printf("%d\n") (compare card1 card2);
+  Printf.printf("compare %d\n") (compare card1 card2);
   Printf.printf("%d\n") (compare card2 card3);
   Printf.printf("%d\n") (compare card1 card4);
   Printf.printf("%d\n") (compare card4 card4);

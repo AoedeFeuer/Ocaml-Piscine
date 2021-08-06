@@ -1,4 +1,4 @@
-module Card : 
+module Card = 
 struct
   module Color =
   struct
@@ -136,9 +136,9 @@ struct
   let toStringVerbose t =
     Printf.sprintf ("Card(%s, %s)") (Value.toStringVerbose t.value) (Color.toStringVerbose t.color)
   
-  let compare (v1, _) (v2, _) =
-    if v1 = v2 then 0 else
-    if v1 > v2 then 1 else
+  let compare v1 v2 =
+    if v1.value = v2.value then 0 else
+    if v1.value > v2.value then 1 else
     (-1)
   
   let max card1 card2 =
@@ -170,8 +170,13 @@ struct
     isOf t Color.Club
 end
 
-let newDeck = 
-  Random. Card.all
+type t = Card.t list
+
+let newDeck () = 
+  let rec fill cards = 
+    if cards <= 0 then [] else
+    (List.nth Card.all (Random.int 52)) :: fill (cards - 1)
+  in fill 52
 
 let toStringList t =
   List.map Card.toString t
@@ -179,4 +184,7 @@ let toStringList t =
 let toStringListVerbose t =
   List.map Card.toStringVerbose t
 
-let drawCard : t -> (Card.t * t)
+let drawCard t =
+  match t with
+  | h :: t -> (h, t)
+  | [] -> raise(Failure "NO CARD")

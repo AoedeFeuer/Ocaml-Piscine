@@ -2,9 +2,9 @@
 ####################### OCAML MAKEFILE #######################
 ##############################################################
 
-NAME = ft_graphics
+NAME = gardening
 
-SOURCES = ft_graphics.ml
+SOURCES = gardening.ml
 
 CAMLC = ocamlc
 CAMLOPT = ocamlopt
