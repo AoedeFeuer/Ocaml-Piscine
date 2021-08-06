@@ -1,5 +1,31 @@
-RESULT = gardering
-SOURCES = gardering.ml
-LIBS = graphics
-OCAMLMAKEFILE = OCamlMakefile
-include $(OCAMLMAKEFILE)
+##############################################################
+####################### OCAML MAKEFILE #######################
+##############################################################
+
+NAME = un_cipher
+
+SOURCES = cipher.ml uncipher.ml
+
+CAMLOPT = ocamlopt
+CAMLDEP = ocamldep
+CAMLFIND = ocamlfind
+
+all: depend $(NAME)
+
+$(NAME) : 
+	$(CAMLOPT) $(SOURCES)
+
+clean:
+	find . -name "*.cm[iox]" -type f -delete
+	find . -name "*.o" -type f -delete
+
+fclean: clean
+	rm -rf $(NAME)
+	rm .depend
+	
+depend:
+	$(CAMLDEP) $(SOURCES) > .depend
+
+re: fclean all
+
+-include .depend
