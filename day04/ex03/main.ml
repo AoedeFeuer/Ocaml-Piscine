@@ -1,15 +1,21 @@
-let(_,_) =
+let main () =
 
   let deck = Deck.newDeck () in
-  print_endline "testing toStringList of newDeck:";
-  List.iter (fun x -> print_string (x ^ "; ")) (Deck.toStringList deck);
-  print_endline "\n\ntesting toStringListVerbose of newDeck:";
-  List.iter (fun x -> print_string (x ^ "; ")) (Deck.toStringListVerbose deck);
-  print_endline "\n\ntesting drawCard till it explodes:";
-  let rec zboub = function
-    (c, d) -> try print_string ((Deck.Card.toString c)^"; ");
-          zboub (Deck.drawCard d)
-        with Failure e -> print_endline ("\nfail: "^e)      
-  in zboub (Deck.drawCard (Deck.newDeck ()));
-   
-   (Deck.Card.Value.all, Deck.Card.Color.all)
+  let deck1 = Deck.newDeck () in
+  print_endline "String List:";
+  List.iter (fun x -> print_string (x ^ " ")) (Deck.toStringList deck);
+  print_endline "\n";
+  List.iter (fun x -> print_string (x ^ " ")) (Deck.toStringList deck1);
+  print_endline "\n";
+  print_endline "String List Verbose:";
+  List.iter (fun x -> print_string (x ^ " ")) (Deck.toStringListVerbose deck);
+  print_endline "\n";
+  List.iter (fun x -> print_string (x ^ " ")) (Deck.toStringListVerbose deck1);
+  print_endline "\n";
+  print_endline "Show Cards:";
+  let rec show_card = function
+    (card, rest) -> try print_endline (Deck.Card.toStringVerbose card); show_card (Deck.drawCard rest)
+            with Failure e -> print_endline ("DRAWING STOP! " ^ e)
+          in show_card (Deck.drawCard (Deck.newDeck ()))
+
+let () = main ()
