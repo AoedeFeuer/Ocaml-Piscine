@@ -26,20 +26,3 @@ class dalek =
 
     method die = print_endline "Emergency Temporal Shift!"
   end
-
-
-(*◦ A name attribute of type string randomly generated with the format : DalekXXX
-with XXX is a random set of chars (DalekSec for example).
-◦ An hp attribute of type int initialized to 100.
-◦ A shield attribute of type bool mutable, initialized to true and change it’s
-value each time the exterminate method is used.
-◦ A to_string method that returns the name of the object with attributes values.
-◦ A talk method that randomly prints one of the following strings on the standard output :
-∗ Explain! Explain!
-∗ Exterminate! Exterminate!
-∗ I obey!
-∗ You are the Doctor! You are the enemy of the Daleks!
-◦ A method exterminate which takes an argument of type people object and kill
-it instantly.
-◦ A method die which prints the following sentence on the standard output :
-Emergency Temporal Shift!*)
